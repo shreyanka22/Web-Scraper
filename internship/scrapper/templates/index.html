@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    
+    
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Web Scraper</h1>
+            {% if user.email %}
+                <a class="login-link" href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+        </header>
+
+        <form id="search-form" action="{% url 'result' %}" method="post">
+            {% csrf_token %}
+            <input name="url" type="text" id="search-box" placeholder="Enter a website URL" onsubmit="onSubmit()">
+            <button type="submit" id="search-button">Search</button>
+            <div id="loader-1" class="loader hide"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("search-form").addEventListener("submit", e => {
+            e.preventDefault()
+            document.getElementById("loader-1").classList.remove("hide")
+            document.getElementById("search-button").classList.add("hide")
+            document.getElementById("search-box").classList.add("hide")
+           
+            setTimeout(() => {
+                document.getElementById("search-form").submit()
+            }, 0)
+        })
+    </script>
+
+</body>
+
+</html>

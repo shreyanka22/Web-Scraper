@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+   
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Web Scraper</h1>
+            <a class="login-link" href="log.html">Login</a>
+        </header>
+
+        {% if status == "false" %}
+            <div class="no-data">
+                <h2>No URL entered!</h2>
+                <p>please enter a URL for infos</p>
+            </div>
+        {% else %}
+            <div class="data">
+                <h2>Info</h2>
+                <h3>Emails</h3>
+                {% for email in emails %}
+                <p>{{ email }}</p>
+                {% endfor %}
+                <h3>Phone Numbers</h3>
+                {% for phone_number in phone_numbers %}
+                <p>{{ phone_number }}</p>
+                {% endfor %}
+                <h3>Links</h3>
+                {% for link in links %}
+                <a href="{{ link }}">{{ link }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
